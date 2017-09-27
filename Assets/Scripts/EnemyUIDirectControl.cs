@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//makes sure the enemy's health bar gets destroyed or deactivated with it
+
 public class EnemyUIDirectControl : MonoBehaviour {
 
+	#region Variables
 	//script attached to an instance of Enemy Body
 	public Enemy enemyScript;
+	#endregion
 
+	#region Start
 	// Use this for initialization
 	void Start () {
 	
-		//EnemyUI script is setting enemyScript to the exact instance of Enemy Body that this instance of Enemy Health is assigned to within EnemyUI script.
-
+		//EnemyUI script is setting enemyScript to the exact instance of Enemy Body that 
+		//this instance of Enemy Health is assigned to within EnemyUI script.
 
 	}
-	
+	#endregion
+
+	#region Update
 	// Update is called once per frame
 	void Update () {
 	
@@ -28,6 +35,6 @@ public class EnemyUIDirectControl : MonoBehaviour {
 		{
 			gameObject.SetActive (false);
 		}
-
 	}
+	#endregion
 }

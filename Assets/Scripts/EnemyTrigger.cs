@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//functions as the enemy AI
+
 public class EnemyTrigger : MonoBehaviour {
 
+	#region Variables
 	//script variables
-	public HateGun gun;
-	public Enemy enemy;
+	public HateGun gun;		//the gun script attached to this enemy's gun
+	public Enemy enemy;		//this enemy's script
+	#endregion
 
+	#region Awake
 	void Awake() {
 
 		//find the enemy script attached to a child of this instance of Enemy
 		enemy = gameObject.GetComponentInChildren<Enemy>();
 
-		//the gun script was attached manually via inspector
+		//the gun script is attached manually via inspector
 	}
+	#endregion
 
+	#region Update
 	void Update() {
 
 		//destroy this parent object if the enemy child has been destroyed
@@ -23,9 +30,10 @@ public class EnemyTrigger : MonoBehaviour {
 			Debug.Log ("enemyBody doesn't exist!");
 			Destroy (gameObject);
 		}
-
 	}
+	#endregion
 
+	#region OnTriggerStay
 	void OnTriggerStay (Collider col)
 	{
 		//when the player is in range, track them and shoot them
@@ -35,10 +43,13 @@ public class EnemyTrigger : MonoBehaviour {
 			gun.isFiring = true;
 		}
 	}
+	#endregion
 
+	#region OnTriggerExit
 	void OnTriggerExit(Collider col)
 	{
 		//stop shooting when the player is out of range
 		gun.isFiring = false;
 	}
+	#endregion
 }

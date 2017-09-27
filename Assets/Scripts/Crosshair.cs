@@ -1,26 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//controls the crosshair creation and placement
+
 public class Crosshair : MonoBehaviour {
 
+	#region Variables
 	//variables to be set in inspector
-	public Texture2D crosshairTexture;
-	public float crosshairScale = 1;
+	public Texture2D crosshairTexture;		//the image for the crosshair
+	public float crosshairScale = 1;		//the scale of the crosshair
 
 	//variables for equations
-	float crosshairWidth;
-	float crosshairHeight;
-	float xMin;
-	float yMin;
+	float crosshairWidth;					//the width of the crosshair
+	float crosshairHeight;					//the height of the crosshair
+	//float xMin;								//minimum x position
+	//float yMin;								//minimum y position
+	#endregion
 
+	#region Start
 	void Start()
 	{
 		//factor in scale
 		crosshairWidth = crosshairTexture.width * crosshairScale;
 		crosshairHeight = crosshairTexture.height * crosshairScale;
 	}
+	#endregion
 
-
+	#region OnGUI
 	void OnGUI()
 	{
 
@@ -44,4 +50,5 @@ public class Crosshair : MonoBehaviour {
 			Debug.Log("No crosshair texture found!");
 		}
 	}
+	#endregion
 }
