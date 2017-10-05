@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//handles the activation of the second floor and deactivation of the first floor
+
 public class SFloorTrigger : MonoBehaviour {
 
+	#region Variables
 	//objects to be enabled/disabled
 	public GameObject secondFloorObj;
 	public GameObject firstFloorObj;
 	public GameObject firstFloorTrigger;
+	#endregion
 
+	#region OnTriggerEnter
 	void OnTriggerEnter (Collider col)
 	{
 		if (col.gameObject.tag == "Player") 
@@ -19,4 +24,5 @@ public class SFloorTrigger : MonoBehaviour {
 			gameObject.SetActive (false);
 		}
 	}
+	#endregion
 }

@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//controls the pickups
+
 public class Pickup : MonoBehaviour {
 
+	#region Variables
 	//variables for controlling the pickup
-	public int ammoUp = 20;
-	public int healthUp = 20;
-	float reTimer;
-	public float delay = 5.0f;
-	bool disable = false;
+	public int ammoUp = 20;			//amount of ammo to give upon pickup
+	public int healthUp = 20;		//amount of health to give upon pickup
+	float reTimer;					//respawn timer
+	public float delay = 5.0f;		//respawn delay
+	bool disable = false;			//whether this pickup should disable itself
 
 	//script and object reference variables
-	GameObject player;
-	PlayerHealth pHealth;
-	LoveGun gun;
+	GameObject player;				//the player object
+	PlayerHealth pHealth;			//reference to the player health script
+	LoveGun gun;					//reference to the lovegun script
+	#endregion
 
+	#region Start
 	// Use this for initialization
 	void Start () {
 	
@@ -25,7 +30,9 @@ public class Pickup : MonoBehaviour {
 		reTimer = delay;
 
 	}
-	
+	#endregion
+
+	#region Update
 	// Update is called once per frame
 	void Update () {
 	
@@ -55,8 +62,9 @@ public class Pickup : MonoBehaviour {
 			}
 		}
 	}
+	#endregion
 
-
+	#region OnTriggerEnter
 	void OnTriggerEnter(Collider col)
 	{
 		//give the player ammo and health then disable itself
@@ -67,4 +75,5 @@ public class Pickup : MonoBehaviour {
 			disable = true;
 		}
 	}
+	#endregion
 }

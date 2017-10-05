@@ -2,37 +2,35 @@
 using System.Collections;
 using UnityEngine.UI;
 
+//controls the health state of the player
+
 public class PlayerHealth : MonoBehaviour {
 
 	#region Variables
 	//health related variables
-	public int startHealth = 100;
-	public int health;
-	public bool Dead;
-	public bool Damaged;
-	public Slider healthBar;
+	public int startHealth = 100;					//amount of health to start with
+	public int health;								//current amount of health
+	public bool Dead;								//the state of death
+	public bool Damaged;							//the state of being damaged
+	public Slider healthBar;						//the actual health bar
 
 	//other variables
-	private float timer = 5.0f;
-	private LoveGun gunshot;
-	public AudioSource deathScream;
-	private CharacterController charMotor;
-	public Crosshair crosshair;
+	private float timer = 5.0f;						//timer for death screen fade
+	private LoveGun gunshot;						//reference to the lovegun script
+	public AudioSource deathScream;					//audio plays upon death
+	private CharacterController charMotor;			//reference to the character controller script
+	public Crosshair crosshair;						//reference to the crosshair script
 
 	//screen fade variables
-	public Image fadeIMG;
-	public Color fadeColor;
-	public float fadeTime = 3f;
+	public Image fadeIMG;							//the image to fade into
+	public Color fadeColor;							//the color of the fade image
+	public float fadeTime = 3f;						//the speed of the fade
 
 	//screen flash variables
-	public Image dmgFlash;
-	public Color flashColor;
-	public float flashTime = 5f;
+	public Image dmgFlash;							//the image that flashes on screen
+	public Color flashColor;						//the color of the image flash
+	public float flashTime = 5f;					//the speed of the flash
 	#endregion
-
-
-
-
 
 	#region Awake
 	// initialize when object is ready

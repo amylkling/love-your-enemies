@@ -2,27 +2,32 @@
 using System.Collections;
 using UnityEngine.UI;
 
+//determines what the win state is and what happens when it's reached
+
 public class WinScript : MonoBehaviour {
 
+	#region Variables
 	//timer variables
-	float restartTimer;
-	float instructTimer;
-	public float instructTimerDelay = 10.0f;
-	public float restartTimerDelay = 5.0f;
+	float restartTimer;								//timer until restart
+	float instructTimer;							//timer for displaying instructions
+	public float instructTimerDelay = 10.0f;		//time to wait between instructions
+	public float restartTimerDelay = 5.0f;			//time to wait until restart
 
 	//GUI variables
-	public Text winGUI;
-	public Text enemyCount;
-	public Text instructGUI;
-	public Text instructGUI2;
+	public Text winGUI;								//text that displays when the player wins
+	public Text enemyCount;							//text displaying the remaining enemies
+	public Text instructGUI;						//instruction text 1
+	public Text instructGUI2;						//instruction text 2
 
 	//counting variable
-	public int count;
-	public GameObject[] enemyParent;
+	public int count;								//the number of enemies left in the game
+	public GameObject[] enemyParent;				//array of objects holding enemy objects
 
 	//other variable
-	public GameObject secondFloor;
+	public GameObject secondFloor;					//the object representing the second floor
+	#endregion
 
+	#region Start
 	// Use this for initialization
 	void Start () {
 	
@@ -35,7 +40,9 @@ public class WinScript : MonoBehaviour {
 		secondFloor.SetActive (false);
 		instructGUI2.enabled = false;
 	}
-	
+	#endregion
+
+	#region Update
 	// Update is called once per frame
 	void Update () {
 	
@@ -91,4 +98,5 @@ public class WinScript : MonoBehaviour {
 		}
 
 	}
+	#endregion
 }

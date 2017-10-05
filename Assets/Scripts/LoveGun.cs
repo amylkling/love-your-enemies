@@ -2,30 +2,32 @@
 using System.Collections;
 using UnityEngine.UI;
 
+//controls the player's gun
+
 public class LoveGun : MonoBehaviour {
 
 	#region Variables
 	//variables needed to shoot the gun
-	public int ammo = 100;
-	public int ammoMax = 100;
-	public int damageAmount = 10;
-	public float raycastDist = 100.0f;
+	public int ammo = 100;					//current amount of ammo
+	public int ammoMax = 100;				//maximum amount of ammo
+	public int damageAmount = 10;			//amount of damage done by each shot
+	public float raycastDist = 100.0f;		//maximum range of the gun
 
 	//sound variables
-	public AudioSource gun;
-	public AudioClip gunShot;
-	public AudioClip dryFire;
+	public AudioSource gun;					//audiosource to feed sounds to
+	public AudioClip gunShot;				//the sound played when firing a shot
+	public AudioClip dryFire;				//the sound played when trying to fire without ammo
 
 	//variable for effects
-	public GameObject shotHit;
-	public GameObject gunEffect;
-	public GameObject effect;
+	public GameObject shotHit;				//the particle effect prefab for when a shot hits something
+	public GameObject gunEffect;			//the particle effect prefab for firing the gun
+	public GameObject effect;				//the created gunEffect object
 
 	//GUI variable
-	public Text ammoGUI;
+	public Text ammoGUI;					//text displaying amount of ammo
 
 	//enemy script
-	public Enemy enemy;
+	public Enemy enemy;						//reference to the enemy's script
 	#endregion
 
 	#region Start()

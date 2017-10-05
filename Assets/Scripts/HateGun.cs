@@ -1,28 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//controls the enemy's gun
+
 public class HateGun : MonoBehaviour {
 
+	#region Variables
 	//shooting variables
-	public float initFireRate = 1f;
-	public float fireRate;
-	public float raycastDist = 30;
-	public GameObject shotHit;
-	public int dmgamt = 10;
-	public bool isFiring = false;
-	public int initShots = 0;
-	public int shotsLimit = 10;
-	public int shots;
-	public float initReloadTime = 5f;
-	public float reloadTime;
+	public float initFireRate = 1f;		//how long to take between shots
+	public float fireRate;				//timer for fire rate
+	public float raycastDist = 30;		//the farthest it can shoot
+	public GameObject shotHit;			//the particle effect prefab for when the shot hits something
+	public int dmgamt = 10;				//the amount of damage each shot does
+	public bool isFiring = false;		//whether the gun is currently firing
+	public int initShots = 0;			//starting number of shots fired
+	public int shotsLimit = 10;			//maximum number of shots that can be fired
+	public int shots;					//current number of shots fired
+	public float initReloadTime = 5f;	//how long to take to reload
+	public float reloadTime;			//reload timer
 	
 	//sound variables
-	private AudioSource damagedSound;
-	public AudioClip damaged;
-	public AudioClip enemyShot;
-	public AudioClip enemyReload;
+	private AudioSource damagedSound;	//audiosource to feed sounds to
+	public AudioClip damaged;			//sound to play when the player gets damaged
+	public AudioClip enemyShot;			//sound to play when the shot hits something other than the player
+	public AudioClip enemyReload;		//sound for reloading
+	#endregion
 
-
+	#region Start
 	// Use this for initialization
 	void Start () {
 	
@@ -32,7 +36,9 @@ public class HateGun : MonoBehaviour {
 		reloadTime = initReloadTime;
 		fireRate = initFireRate;
 	}
-	
+	#endregion
+
+	#region Update
 	// Update is called once per frame
 	void Update () {
 		//create and initialize a variable for the PlayerHealth script
@@ -89,4 +95,5 @@ public class HateGun : MonoBehaviour {
 			}
 		}
 	}
+	#endregion
 }
