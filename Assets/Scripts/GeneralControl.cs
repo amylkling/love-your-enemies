@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 //script to keep cursor from appearing and going off screen
-//as well as to allow a button to quit the game
+//as well as releasing the cursor when in menus
 
 public class GeneralControl : MonoBehaviour {
 
 	#region Variables
 	CursorLockMode desiredState;
+	Pause pauseScript;
 	#endregion
 
 	#region Start
@@ -15,6 +17,10 @@ public class GeneralControl : MonoBehaviour {
 	void Start () {
 	
 		desiredState = CursorLockMode.Locked;
+		if(GameObject.Find("UI") != null)
+		{
+			pauseScript = GameObject.Find("UI").GetComponent<Pause>();
+		}
 	}
 	#endregion
 
@@ -22,13 +28,33 @@ public class GeneralControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		//check for the existance of the pause menu
+		if (pauseScript != null)
+		{
+			//lock the cursor when the game isn't paused and not on the main menu
+			if(!pauseScript.Paused && SceneManager.GetActiveScene().name != "menu")
+			{
+				desiredState = CursorLockMode.Locked;
+			}
+			else
+			{
+				desiredState = CursorLockMode.None;
+			}
+		}
+		else
+		{
+			desiredState = CursorLockMode.Locked;
+		}
+
+
 		SetCursorState ();
 
+		/*
 		//quit game when escape is pressed
 		if (Input.GetKeyDown (KeyCode.Escape))
 		{
 			Application.Quit ();
-		}
+		}*/
 	}
 	#endregion
 

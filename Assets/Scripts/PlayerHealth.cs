@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //controls the health state of the player
 
@@ -58,7 +59,7 @@ public class PlayerHealth : MonoBehaviour {
 			timer -= Time.deltaTime;
 			if (timer <= 0f)
 			{
-				Application.LoadLevel (Application.loadedLevel);
+				SceneManager.LoadScene(0);
 			}
 
 		}

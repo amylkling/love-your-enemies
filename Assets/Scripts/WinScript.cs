@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //determines what the win state is and what happens when it's reached
 
@@ -91,7 +92,7 @@ public class WinScript : MonoBehaviour {
 				restartTimer -= Time.deltaTime;
 				if (restartTimer <= 0)
 				{
-					Application.LoadLevel (Application.loadedLevel);
+					SceneManager.LoadScene(0);
 
 				}
 			}

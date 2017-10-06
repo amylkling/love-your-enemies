@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-//controls the nemy's stats and state
+//controls the enemy's stats and state
 
 public class Enemy : MonoBehaviour {
 
@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour {
 		if (Dead)
 		{
 			Debug.Log("time to die");
+			Destroy(gameObject.transform.parent.gameObject);
 			Destroy (gameObject);
 		}
 	}

@@ -39,7 +39,11 @@ public class EnemyTrigger : MonoBehaviour {
 		//when the player is in range, track them and shoot them
 		if (col.tag == "Player2")
 		{
-			transform.LookAt (col.transform);
+			if(transform.GetChild(0) != null)
+			{
+				transform.GetChild(0).LookAt (col.transform);
+			}
+
 			gun.isFiring = true;
 		}
 	}

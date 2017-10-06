@@ -15,6 +15,9 @@ public class Crosshair : MonoBehaviour {
 	float crosshairHeight;					//the height of the crosshair
 	//float xMin;								//minimum x position
 	//float yMin;								//minimum y position
+
+	//other variables
+	Pause pauseScript;						//reference to the pause script
 	#endregion
 
 	#region Start
@@ -23,6 +26,11 @@ public class Crosshair : MonoBehaviour {
 		//factor in scale
 		crosshairWidth = crosshairTexture.width * crosshairScale;
 		crosshairHeight = crosshairTexture.height * crosshairScale;
+
+		if(GameObject.Find("UI") != null)
+		{
+			pauseScript = GameObject.Find("UI").GetComponent<Pause>();
+		}
 	}
 	#endregion
 
@@ -39,11 +47,23 @@ public class Crosshair : MonoBehaviour {
 		*/
 
 
-		//crosshair at center of screen
+		//crosshair at center of screen when the game isn't paused
 		if (crosshairTexture != null)
 		{
-			GUI.DrawTexture(new Rect((Screen.width-crosshairWidth)/2 ,(Screen.height-crosshairHeight)/2, 
-			                         crosshairWidth, crosshairHeight),crosshairTexture);
+			if (pauseScript != null)
+			{
+				if(!pauseScript.Paused)
+				{
+					GUI.DrawTexture(new Rect((Screen.width-crosshairWidth)/2 ,(Screen.height-crosshairHeight)/2, 
+						crosshairWidth, crosshairHeight),crosshairTexture);
+				}
+			}
+			else
+			{
+				GUI.DrawTexture(new Rect((Screen.width-crosshairWidth)/2 ,(Screen.height-crosshairHeight)/2, 
+					crosshairWidth, crosshairHeight),crosshairTexture);
+			}
+
 		}
 		else
 		{

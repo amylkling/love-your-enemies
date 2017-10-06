@@ -28,6 +28,9 @@ public class LoveGun : MonoBehaviour {
 
 	//enemy script
 	public Enemy enemy;						//reference to the enemy's script
+
+	//pause
+	Pause pauseScript;						//reference to pause script
 	#endregion
 
 	#region Start()
@@ -36,6 +39,11 @@ public class LoveGun : MonoBehaviour {
 	{
 		UpdateGUI();
 		gun = gameObject.GetComponent<AudioSource>();
+
+		if(GameObject.Find("UI") != null)
+		{
+			pauseScript = GameObject.Find("UI").GetComponent<Pause>();
+		}
 	}
 	#endregion
 	
@@ -44,54 +52,61 @@ public class LoveGun : MonoBehaviour {
 	void Update () {
 		
 		RaycastHit hit;
-		if (Input.GetMouseButtonDown(0))
+		if (pauseScript != null)
 		{
-			//shoot as long as there is ammo
-			if (ammo > 0)
+			if (!pauseScript.Paused)
 			{
-				//determine if the "shot" hit anything
-				if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDist))
+				//if the player presses the mouse button when the game isn't paused
+				if (Input.GetMouseButtonDown(0))
 				{
-					//cause enemy to take damage
-					if (hit.collider.tag == "Enemy2")
+					//shoot as long as there is ammo
+					if (ammo > 0)
 					{
-						Instantiate (shotHit, hit.point, Quaternion.FromToRotation(transform.up, hit.normal));
-						effect = Instantiate (gunEffect, gameObject.transform.position, Quaternion.identity) as GameObject; 
-						effect.transform.SetParent (gameObject.transform);
-						enemy = hit.collider.GetComponent<Enemy>();
-						enemy.TakeDmg(damageAmount);
-						Debug.Log ("Hit Enemy!");
-						gun.clip = gunShot;
-						gun.Play ();
+						//determine if the "shot" hit anything
+						if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDist))
+						{
+							//cause enemy to take damage
+							if (hit.collider.tag == "Enemy2")
+							{
+								Instantiate(shotHit, hit.point, Quaternion.FromToRotation(transform.up, hit.normal));
+								effect = Instantiate(gunEffect, gameObject.transform.position, Quaternion.identity) as GameObject; 
+								effect.transform.SetParent(gameObject.transform);
+								enemy = hit.collider.GetComponent<Enemy>();
+								enemy.TakeDmg(damageAmount);
+								Debug.Log("Hit Enemy!");
+								gun.clip = gunShot;
+								gun.Play();
 
+							}
+							else
+							{
+								Instantiate(shotHit, hit.point, Quaternion.FromToRotation(transform.up, hit.normal));
+								effect = Instantiate(gunEffect, gameObject.transform.position, Quaternion.identity) as GameObject; 
+								effect.transform.SetParent(gameObject.transform);
+								gun.clip = gunShot;
+								gun.Play();
+							}
+						}
+						else
+						{
+							//play a sound if the shot misses
+							gun.clip = gunShot;
+							gun.Play();
+							effect = Instantiate(gunEffect, gameObject.transform.position, Quaternion.identity) as GameObject;
+							effect.transform.SetParent(gameObject.transform);
+						}
+				 
+
+						//decrease ammo
+						ammo--;
 					}
 					else
 					{
-						Instantiate (shotHit, hit.point, Quaternion.FromToRotation(transform.up, hit.normal));
-						effect = Instantiate (gunEffect, gameObject.transform.position, Quaternion.identity) as GameObject; 
-						effect.transform.SetParent (gameObject.transform);
-						gun.clip = gunShot;
-						gun.Play ();
+						//play a different sound when out of ammo
+						gun.clip = dryFire;
+						gun.Play();
 					}
 				}
-				else
-				{
-					//play a sound if the shot misses
-					gun.clip = gunShot;
-					gun.Play ();
-					effect = Instantiate (gunEffect, gameObject.transform.position, Quaternion.identity) as GameObject;
-					effect.transform.SetParent (gameObject.transform);
-				}
-				 
-
-				//decrease ammo
-				ammo--;
-			}
-			else
-			{
-				//play a different sound when out of ammo
-				gun.clip = dryFire;
-				gun.Play ();
 			}
 		}
 
